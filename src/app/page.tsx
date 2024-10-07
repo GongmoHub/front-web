@@ -13,7 +13,6 @@ const Mainpage: React.FC = () => {
           </div>
         </div>
       </div>
-      <div className="main_box_middle"></div>
       <div className="main_box_bottom"></div>
     </div>
   );

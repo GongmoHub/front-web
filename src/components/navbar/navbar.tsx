@@ -12,31 +12,36 @@ const Navbar: React.FC = () => {
   };
   return (
     <div className="navbar">
-      <div>
-        <p
-          className="title"
-          onClick={() => handleNavigation('/')}
-        >
-          공모허브
-        </p>
+      <div className="navbar_top">
+        <div>
+          <p
+            className="title"
+            onClick={() => handleNavigation('/')}
+          >
+            공모허브
+          </p>
+        </div>
+        <div className="content">
+          <p
+            onClick={() =>
+              handleNavigation('/mento/choose')
+            }
+          >
+            피드백 요청
+          </p>
+          <p onClick={() => handleNavigation('/recruit')}>
+            팀원 모집
+          </p>
+          <p
+            onClick={() =>
+              handleNavigation('/mento/register')
+            }
+          >
+            멘토 등록
+          </p>
+        </div>
       </div>
-      <div className="content">
-        <p
-          onClick={() => handleNavigation('/mento/choose')}
-        >
-          피드백 요청
-        </p>
-        <p onClick={() => handleNavigation('/recruit')}>
-          팀원 모집
-        </p>
-        <p
-          onClick={() =>
-            handleNavigation('/mento/register')
-          }
-        >
-          멘토 등록
-        </p>
-      </div>
+      <div className="navbar_bottom"></div>
     </div>
   );
 };

@@ -1,10 +1,10 @@
 section {
-    .section_title{
+    .section_title {
         display: flex;
         align-items: center;
         border-bottom: 2px solid #D9D9D9;
-        
-        .order{
+
+        .order {
             display: flex;
             justify-content: center;
             align-items: center;
@@ -18,10 +18,10 @@ section {
         }
     }
 
-    .section_content{
+    .section_content {
         margin: 2rem 0rem;
 
-        .list-line{
+        .list-line {
             display: flex;
         }
     }

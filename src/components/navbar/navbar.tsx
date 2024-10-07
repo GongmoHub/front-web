@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-
+import './navbar.scss';
 const Navbar: React.FC = () => {
   const router = useRouter(); // 새로운 useRouter 사용
 
@@ -11,8 +11,32 @@ const Navbar: React.FC = () => {
     router.push(path);
   };
   return (
-    <div className="nav_bar">
-      <p>공모허브</p>
+    <div className="navbar">
+      <div>
+        <p
+          className="title"
+          onClick={() => handleNavigation('/')}
+        >
+          공모허브
+        </p>
+      </div>
+      <div className="content">
+        <p
+          onClick={() => handleNavigation('/mento/choose')}
+        >
+          피드백 요청
+        </p>
+        <p onClick={() => handleNavigation('/recruit')}>
+          팀원 모집
+        </p>
+        <p
+          onClick={() =>
+            handleNavigation('/mento/register')
+          }
+        >
+          멘토 등록
+        </p>
+      </div>
     </div>
   );
 };

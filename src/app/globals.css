@@ -3,7 +3,6 @@ body {
   overflow-x: hidden;
   display: flex;
   justify-content: center;
-  
 }
 @font-face {
   font-family: 'BMJUA';
@@ -37,7 +36,8 @@ a {
 }
 
 .main_page {
-  margin-top: 160px;
+  margin-top: 210px;
+  margin-bottom: 60px;
   width: 80vw;
   display: flex;
   justify-content: center;

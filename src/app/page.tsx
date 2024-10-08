@@ -2,7 +2,7 @@
 
 import './main.scss';
 import { useEffect, useState } from 'react';
-
+import { useRouter } from 'next/navigation';
 interface Competition {
   name: string;
   startDate: string;
@@ -18,7 +18,7 @@ const Mainpage: React.FC = () => {
   >([]);
   const [currentPage, setCurrentPage] = useState(1);
   const competitionsPerPage = 6; // 한 페이지에 6개의 공모전
-
+  const router = useRouter();
   useEffect(() => {
     // 예시 데이터를 서버에서 받아오는 것처럼 설정
     const fetchCompetitions = () => {
@@ -108,6 +108,9 @@ const Mainpage: React.FC = () => {
   const paginate = (pageNumber: number) =>
     setCurrentPage(pageNumber);
 
+  const resultContest = () => {
+    router.push('/result');
+  };
   return (
     <div>
       <div className="main_box_top">
@@ -115,8 +118,12 @@ const Mainpage: React.FC = () => {
         <div className="project_box">
           <textarea className="input_box"></textarea>
           <div className="button_box">
-            <button className="button">피드백 요청</button>
-            <button className="button">공모전 검색</button>
+            <button
+              className="button"
+              onClick={() => resultContest()}
+            >
+              공모전 검색
+            </button>
           </div>
         </div>
       </div>

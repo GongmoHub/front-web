@@ -75,28 +75,34 @@ const Mainpage: React.FC = () => {
         </div>
       </div>
       <div className="main_box_middle"></div>
-      <div className="main_box_bottom">
-        {currentCompetitions.map((competition, index) => (
-          <div key={index} className="competition_card">
-            <img
-              src={competition.imageURL}
-              className="competition_image"
-            />
-            <div className="competition_info">
-              <p>{competition.title}</p>
-              <p>시작일: {competition.startDate}</p>
-              <p>종료일: {competition.endDate}</p>
-              <p>내용: {competition.content}</p>
-              <a
-                href={competition.contestURL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {competition.contestURL}
-              </a>
+      <div className="main_bottom">
+        <div className="main_box_bottom">
+          {currentCompetitions.map((competition, index) => (
+            <div key={index} className="competition_card">
+              <img
+                src={competition.imageURL}
+                className="competition_image"
+              />
+              <div className="competition_info">
+                <p>{competition.title}</p>
+                <p>시작일: {competition.startDate}</p>
+                <p>종료일: {competition.endDate}</p>
+                <a
+                  href={competition.contestURL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {competition.contestURL.length > 20
+                    ? `${competition.contestURL.slice(
+                        0,
+                        20
+                      )}...`
+                    : competition.contestURL}
+                </a>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       <div className="pagination">
         {[

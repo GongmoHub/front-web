@@ -50,7 +50,9 @@
   height: 30px;
   border-bottom: 1.5px solid #a4a4a4;
 }
-
+.main_bottom {
+  height: 1050px;
+}
 .main_box_bottom {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 1줄에 2개씩 */
@@ -58,7 +60,7 @@
   margin-top: 30px;
   padding: 20px;
   overflow: hidden;
-  height: 900px;
+
   .competition_card {
     background-color: #f9f9f9;
     padding: 15px;

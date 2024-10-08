@@ -37,7 +37,7 @@ const DeletePage: React.FC = () => {
     // 서버로 로그인 요청 보내기
     try {
       const response = await axios.delete(
-        `http://172.20.10.9/mentor?email=${email}&password=${password}`
+        `http://172.16.1.240/mentor?email=${email}&password=${password}`
       );
 
       if (response.status === 204) {
@@ -87,7 +87,7 @@ const DeletePage: React.FC = () => {
         <div className="button_box">
           <button
             className="login_button"
-            onClick={handleSubmit}
+            onClick={() => handleSubmit()}
           >
             삭 제
           </button>

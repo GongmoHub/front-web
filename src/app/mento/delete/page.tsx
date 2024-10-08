@@ -3,10 +3,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './login.scss';
+import { useRouter } from 'next/navigation';
 
-const LoginPage: React.FC = () => {
+const DeletePage: React.FC = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
-    uid: '',
+    email: '',
     password: '',
   });
 
@@ -24,34 +26,28 @@ const LoginPage: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    const { uid, password } = formData;
+    const { email, password } = formData;
 
     // 유효성 검사
-    if (!uid || !password) {
+    if (!email || !password) {
       setErrorMessage('아이디와 비밀번호를 입력해 주세요.');
       return;
     }
 
     // 서버로 로그인 요청 보내기
     try {
-      const response = await axios.post(
-        'http://172.20.10.9/mentor/signin',
-        {
-          uid: uid,
-          password: password,
-        }
+      const response = await axios.delete(
+        `http://172.20.10.9/mentor?email=${email}&password=${password}`
       );
 
-      if (response.status === 200) {
+      if (response.status === 204) {
         // 로그인 성공 처리
         setErrorMessage('');
-        setSuccessMessage('로그인 성공!');
-        // 예: 토큰을 로컬 스토리지에 저장하고 리다이렉트 처리
-        localStorage.setItem('token', response.data.token);
-        // 원하는 페이지로 이동
+        setSuccessMessage('삭제 성공!');
+        router.push('/');
       } else {
         setErrorMessage(
-          '로그인 실패: 잘못된 아이디 또는 비밀번호입니다.'
+          '삭제 실패: 잘못된 아이디 또는 비밀번호입니다.'
         );
       }
     } catch (error) {
@@ -63,13 +59,13 @@ const LoginPage: React.FC = () => {
   return (
     <div>
       <div className="login_box">
-        <h2 className="login_title">로그인</h2>
+        <h2 className="login_title">멘토 등록 삭제</h2>
         <input
           className="input_box"
           type="text"
-          name="uid"
+          name="email"
           placeholder="아이디"
-          value={formData.uid}
+          value={formData.email}
           onChange={handleChange}
         />
         <input
@@ -93,7 +89,7 @@ const LoginPage: React.FC = () => {
             className="login_button"
             onClick={handleSubmit}
           >
-            로그인
+            삭 제
           </button>
         </div>
       </div>
@@ -101,4 +97,4 @@ const LoginPage: React.FC = () => {
   );
 };
 
-export default LoginPage;
+export default DeletePage;

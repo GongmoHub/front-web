@@ -40,9 +40,11 @@ const Navbar: React.FC = () => {
             멘토 등록
           </p>
           <p
-            onClick={() => handleNavigation('/mento/login')}
+            onClick={() =>
+              handleNavigation('/mento/delete')
+            }
           >
-            멘토 로그인
+            멘토 삭제
           </p>
         </div>
       </div>

@@ -3,8 +3,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './register.scss';
+import { useRouter } from 'next/navigation';
 
 const RegisterPage: React.FC = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     id: '',
     password: '',
@@ -12,7 +14,7 @@ const RegisterPage: React.FC = () => {
     content: '',
     record: '',
     openTalkURL: '',
-    imageURL: null as File | null,
+    imageURL: '', // 이미지 URL을 사용할 경우 처리
   });
 
   const [errorMessage, setErrorMessage] = useState('');
@@ -39,33 +41,37 @@ const RegisterPage: React.FC = () => {
       setProfileImage(URL.createObjectURL(file)); // 미리보기 이미지 설정
       setFormData((prevData) => ({
         ...prevData,
-        imageURL: file || null,
+        imageURL: URL.createObjectURL(file), // 이미지 URL로 변경
       }));
     }
   };
 
   const handleSubmit = async () => {
-    const data = new FormData();
-    data.append('id', formData.id);
-    data.append('password', formData.password);
-    data.append('name', formData.name);
-    data.append('content', formData.content);
-    data.append('record', formData.record);
-    data.append('openTalkURL', formData.openTalkURL);
+    const data = {
+      id: formData.id,
+      password: formData.password,
+      name: formData.name,
+      content: formData.content,
+      record: formData.record,
+      openTalkURL: formData.openTalkURL,
+      imageURL: formData.imageURL, // 이미지 URL 전송
+    };
 
-    if (formData.imageURL) {
-      data.append('imageURL', formData.imageURL);
-    }
-    console.log(formData);
     try {
       const response = await axios.post(
         'http://172.20.10.9/mentor/signup',
-        data
+        data, // 데이터를 JSON 형식으로 전송
+        {
+          headers: {
+            'Content-Type': 'application/json', // JSON 형식으로 전송
+          },
+        }
       );
 
       if (response.status === 200) {
         console.log('등록 성공');
         setErrorMessage('');
+        router.push('/'); // 로그인 페이지로 이동
       } else {
         console.error('등록 실패');
       }

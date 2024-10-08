@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from 'react';
 import './choose.scss';
+import axios from 'axios';
 
 interface Mentor {
-  id: string;
+  id: string | null; // id가 null일 수 있으므로
   name: string;
   content: string;
   record: string;
@@ -18,92 +19,20 @@ const ChoosePage: React.FC = () => {
   const mentorsPerPage = 8; // 한 페이지에 표시할 mentor 수
 
   useEffect(() => {
-    const fetchMentors = () => {
-      const data: Mentor[] = [
-        {
-          id: '공모전 1',
-          name: '이창의',
-          content: '백엔드 개발자',
-          record: '계명대학교 대장',
-          openTalkURL: 'https://naver.com',
-          imageUrl: './profile.png',
-        },
-        {
-          id: '공모전 2',
-          name: '김지후',
-          content: '프론트엔드 개발자',
-          record: '계명대학교 후지',
-          openTalkURL: 'https://naver.com',
-          imageUrl: './profile.png',
-        },
-        {
-          id: '공모전 3',
-          name: '한동근',
-          content: '백엔드 개발자',
-          record: '계명대학교 헬창',
-          openTalkURL: 'https://naver.com',
-          imageUrl: './profile.png',
-        },
-        {
-          id: '공모전 4',
-          name: '이상현',
-          content: '프론트엔드 개발자',
-          record: '계명대학교 동네 형',
-          openTalkURL: 'https://naver.com',
-          imageUrl: './profile.png',
-        },
-        {
-          id: '공모전 5',
-          name: '이종현',
-          content: '백엔드 개발자',
-          record: '계명대학교 키다리',
-          openTalkURL: 'https://naver.com',
-          imageUrl: './profile.png',
-        },
-        {
-          id: '공모전 6',
-          name: '김보성',
-          content: '프론트엔드 개발자',
-          record: '계명대학교 대장님',
-          openTalkURL: 'https://naver.com',
-          imageUrl: './profile.png',
-        },
-        {
-          id: '공모전 7',
-          name: '이민재',
-          content: '백엔드 개발자',
-          record: '계명대학교 축알못',
-          openTalkURL: 'https://naver.com',
-          imageUrl: './profile.png',
-        },
-        {
-          id: '공모전 8',
-          name: '오민규',
-          content: '백엔드 개발자',
-          record: '계명대학교 랄로',
-          openTalkURL: 'https://naver.com',
-          imageUrl: './profile.png',
-        },
-        {
-          id: '공모전 9',
-          name: '류세민',
-          content: '프론트엔드 개발자',
-          record: '계명대학교 병신',
-          openTalkURL: 'https://naver.com',
-          imageUrl: './profile.png',
-        },
-        {
-          id: '공모전 10',
-          name: '김민수',
-          content: '백엔드 개발자',
-          record: '계명대학교',
-          openTalkURL: 'https://naver.com',
-          imageUrl: './profile.png',
-        },
-      ];
-      setMentors(data);
+    const fetchMentors = async () => {
+      // 서버에서 mentor 데이터 가져오기
+      try {
+        const response = await axios.get(
+          'http://172.20.10.9/mentor'
+        );
+        setMentors(response.data);
+      } catch (error) {
+        console.error(
+          '데이터를 불러오는 중 오류 발생:',
+          error
+        );
+      }
     };
-
     fetchMentors();
   }, []);
 
@@ -127,28 +56,29 @@ const ChoosePage: React.FC = () => {
 
   return (
     <div>
-      <div className="mentors_grid">
-        {currentMentors.map((mentor) => (
-          <div key={mentor.id} className="mentor_card">
-            <img
-              src={mentor.imageUrl}
-              alt={mentor.name}
-              className="mentor_image"
-            />
-            <div className="mentor_info">
-              <h3>{mentor.name}</h3>
-              <p>{mentor.content}</p>
-              <p>{mentor.record}</p>
-              <a
-                href={mentor.openTalkURL}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                오픈톡 바로가기
-              </a>
+      <div className="choose_boxs">
+        <div className="mentors_grid">
+          {currentMentors.map((mentor, index) => (
+            <div
+              key={mentor.id || index}
+              className="mentor_card"
+            >
+              {' '}
+              {/* id가 없으면 index를 사용 */}
+              <img
+                src={mentor.imageUrl}
+                alt={mentor.name}
+                className="mentor_image"
+              />
+              <div className="mentor_info">
+                <h3>{mentor.name}</h3>
+                <p>{mentor.content}</p>
+                <p>{mentor.record}</p>
+                <p>{mentor.openTalkURL}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       {/* 페이지네이션 인디케이터 */}
       <div className="pagination">

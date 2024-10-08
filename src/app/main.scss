@@ -5,11 +5,20 @@
   padding-left: 2%;
   padding-right: 2%;
   .information_box {
-    width: 40%;
+    width: 47%;
     height: 300px;
-    background-color: #a4a4a4;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    h1 {
+      font-size: 2rem;
+    }
+    .information_text {
+      margin-top: 20px;
+      font-size: 1rem;
+      font-family: 'BMJUA';
+      margin-bottom: 20px;
+    }
   }
   .project_box {
     width: 50%;
@@ -116,4 +125,16 @@
 .pagination button:hover {
   background-color: #007bff;
   color: white;
+}
+
+.competition_tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  padding: 3px;
+  font-size: 0.9rem;
+  color: white;
+  background-color: #238eff;
+  border-radius: 10px;
 }

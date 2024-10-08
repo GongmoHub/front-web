@@ -1,0 +1,67 @@
+.result_box {
+  margin-top: -100px;
+  height: 1500px;
+}
+
+.result_box_bottom {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 1줄에 2개씩 */
+  gap: 20px; /* 각 카드 사이의 간격 */
+  margin-top: 30px;
+  padding: 20px;
+  overflow: hidden;
+
+  .competition_card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 250px;
+    display: flex;
+    flex-direction: row;
+  }
+
+  .competition_image {
+    width: 50%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: #a4a4a4;
+  }
+
+  .competition_info {
+    width: 45%;
+    margin-left: 4%;
+    height: 200px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.pagination button {
+  margin: 0 5px;
+  padding: 5px 10px;
+  border: none;
+  background-color: #ffffff;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: white;
+}
+
+.pagination button:hover {
+  background-color: #007bff;
+  color: white;
+}

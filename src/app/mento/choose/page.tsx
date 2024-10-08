@@ -23,7 +23,7 @@ const ChoosePage: React.FC = () => {
       // 서버에서 mentor 데이터 가져오기
       try {
         const response = await axios.get(
-          'http://172.20.10.9/mentor'
+          'http://172.16.1.240/mentor'
         );
         setMentors(response.data);
       } catch (error) {
@@ -76,9 +76,9 @@ const ChoosePage: React.FC = () => {
               />
               <div className="mentor_info">
                 <h3>{mentor.name}</h3>
-                <p>{mentor.content}</p>
-                <p>{mentor.record}</p>
-                <p>{mentor.openTalkURL}</p>
+                <p>내용 : {mentor.content}</p>
+                <p>기록 : {mentor.record}</p>
+                <p>연락망 : {mentor.openTalkURL}</p>
               </div>
             </div>
           ))}

@@ -59,7 +59,7 @@ const RegisterPage: React.FC = () => {
 
     try {
       const response = await axios.post(
-        'http://172.20.10.9/mentor/signup',
+        'http://172.16.1.240/mentor/signup',
         data, // 데이터를 JSON 형식으로 전송
         {
           headers: {
@@ -98,7 +98,7 @@ const RegisterPage: React.FC = () => {
             type="file"
             name="imageURL"
             accept="image/*"
-            onChange={handleFileChange}
+            //onChange={handleFileChange}
             style={{ display: 'none' }} // 숨긴 파일 선택 input
           />
         </div>

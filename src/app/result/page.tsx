@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation'; // useSearchParams 사용
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import '../main.scss';
+import './result.scss';
 
 interface Competition {
   contestId: number;
@@ -42,7 +42,7 @@ const ResultPage: React.FC = () => {
         console.log('ordinary:', ordinary);
         // 동적 경로로 요청 보내기
         const response = await axios.get(
-          `http://172.20.10.9/contest/ordinary/${ordinary}`
+          `http://172.16.1.240/contest/ordinary/${ordinary}`
         );
 
         if (response.status === 200) {
@@ -63,8 +63,8 @@ const ResultPage: React.FC = () => {
 
   return (
     <div>
-      <div className="main_bottom">
-        <div className="main_box_bottom">
+      <div className="result_box">
+        <div className="result_box_bottom">
           {competitions.map((competition, index) => (
             <div key={index} className="competition_card">
               <img
@@ -91,25 +91,25 @@ const ResultPage: React.FC = () => {
             </div>
           ))}
         </div>
-        <div className="pagination">
-          {[
-            ...Array(
-              Math.ceil(
-                competitions.length / competitionsPerPage
-              )
-            ),
-          ].map((_, i) => (
-            <button
-              key={i}
-              onClick={() => paginate(i + 1)}
-              className={
-                currentPage === i + 1 ? 'active' : ''
-              }
-            >
-              {i + 1}
-            </button>
-          ))}
-        </div>
+      </div>
+      <div className="pagination">
+        {[
+          ...Array(
+            Math.ceil(
+              competitions.length / competitionsPerPage
+            )
+          ),
+        ].map((_, i) => (
+          <button
+            key={i}
+            onClick={() => paginate(i + 1)}
+            className={
+              currentPage === i + 1 ? 'active' : ''
+            }
+          >
+            {i + 1}
+          </button>
+        ))}
       </div>
     </div>
   );

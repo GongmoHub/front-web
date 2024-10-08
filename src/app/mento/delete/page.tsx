@@ -87,7 +87,7 @@ const DeletePage: React.FC = () => {
         <div className="button_box">
           <button
             className="login_button"
-            onClick={handleSubmit}
+            onClick={() => handleSubmit()}
           >
             삭 제
           </button>

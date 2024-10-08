@@ -4,6 +4,7 @@ import './main.scss';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+
 interface Competition {
   contestId: number;
   title: string;
@@ -19,8 +20,10 @@ const Mainpage: React.FC = () => {
     Competition[]
   >([]);
   const [currentPage, setCurrentPage] = useState(1);
+  const [ordinary, setOrdinary] = useState(''); // textarea의 값을 저장하는 상태 추가
   const competitionsPerPage = 6; // 한 페이지에 6개의 공모전
   const router = useRouter();
+
   useEffect(() => {
     // 서버에서 공모전 데이터 가져오기
     const fetchCompetitions = async () => {
@@ -56,14 +59,24 @@ const Mainpage: React.FC = () => {
     setCurrentPage(pageNumber);
 
   const resultContest = () => {
-    router.push('/result');
+    // 쿼리 파라미터를 문자열로 직접 추가하여 전달
+    router.push(
+      `/result?ordinary=${encodeURIComponent(ordinary)}`
+    );
   };
+
   return (
     <div>
       <div className="main_box_top">
         <div className="information_box"></div>
         <div className="project_box">
-          <textarea className="input_box"></textarea>
+          {/* textarea 값 변경 핸들러 */}
+          <textarea
+            className="input_box"
+            value={ordinary}
+            onChange={(e) => setOrdinary(e.target.value)} // textarea 값 상태로 관리
+            placeholder="내용을 입력하세요"
+          ></textarea>
           <div className="button_box">
             <button
               className="button"

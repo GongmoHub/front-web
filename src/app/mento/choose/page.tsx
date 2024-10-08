@@ -66,8 +66,12 @@ const ChoosePage: React.FC = () => {
               {' '}
               {/* id가 없으면 index를 사용 */}
               <img
-                src={mentor.imageUrl}
-                alt={mentor.name}
+                src={
+                  mentor.imageUrl
+                    ? mentor.imageUrl
+                    : '/profile.png'
+                } // src가 없으면 profile.png로 대체
+                alt={mentor.name || '프로필 이미지'} // alt도 안전하게 대체
                 className="mentor_image"
               />
               <div className="mentor_info">

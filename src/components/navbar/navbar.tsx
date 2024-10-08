@@ -39,6 +39,11 @@ const Navbar: React.FC = () => {
           >
             멘토 등록
           </p>
+          <p
+            onClick={() => handleNavigation('/mento/login')}
+          >
+            멘토 로그인
+          </p>
         </div>
       </div>
       <div className="navbar_bottom"></div>

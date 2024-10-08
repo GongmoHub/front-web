@@ -1,8 +1,7 @@
-import React from 'react'
+import React from 'react';
 
+const ChoosePage: React.FC = () => {
+  return <div>choose</div>;
+};
 
-export default function page() {
-  return (
-    <div>page</div>
-  )
-}
+export default ChoosePage;

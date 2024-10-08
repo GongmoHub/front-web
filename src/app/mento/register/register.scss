@@ -1,0 +1,81 @@
+.register_box {
+  margin-left: 20%;
+  width: 60%;
+  height: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+  .input_box {
+    border: none;
+    border-bottom: 1px solid #d1d1d1;
+    width: 80%;
+    height: 30px;
+    margin-top: 15px;
+  }
+  .text_box {
+    resize: none;
+    width: 80%;
+    height: 80px;
+    border-color: #d1d1d1;
+    margin-top: 15px;
+  }
+  .image_box {
+    width: 80%;
+    height: 30px;
+    display: none; /* 파일 선택 버튼 숨기기 */
+
+    .custom-file-upload {
+      width: 100%;
+      display: flex;
+      justify-content: left;
+    }
+
+    .custom-file-upload-button {
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .custom-file-upload-button:hover {
+      background-color: #0056b3;
+    }
+  }
+  .button_box {
+    width: 80%;
+    display: flex;
+    justify-content: right;
+  }
+}
+
+.profile_image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+.error_message {
+  color: red;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.register_button {
+  margin-top: 20px;
+  width: 20%;
+  height: 30px;
+  font-size: 18px;
+  border-radius: 10px;
+  color: white;
+  font-family: 'BMJUA';
+  background-color: #244dff;
+}

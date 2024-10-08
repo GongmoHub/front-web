@@ -37,7 +37,7 @@ const DeletePage: React.FC = () => {
     // 서버로 로그인 요청 보내기
     try {
       const response = await axios.delete(
-        `http://172.16.1.240/mentor?email=${email}&password=${password}`
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}?email=${email}&password=${password}`
       );
 
       if (response.status === 204) {

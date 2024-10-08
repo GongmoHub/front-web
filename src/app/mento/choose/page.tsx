@@ -23,7 +23,7 @@ const ChoosePage: React.FC = () => {
       // 서버에서 mentor 데이터 가져오기
       try {
         const response = await axios.get(
-          'http://172.16.1.240/mentor'
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/mentor`
         );
         setMentors(response.data);
       } catch (error) {

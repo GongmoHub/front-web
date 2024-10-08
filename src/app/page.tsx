@@ -30,7 +30,7 @@ const Mainpage: React.FC = () => {
     const fetchCompetitions = async () => {
       try {
         const response = await axios.get(
-          'http://172.16.1.240/contest'
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/contest`
         );
         const data: Competition[] = response.data; // 서버로부터 받아온 데이터를 Competition 배열로 변환
         console.log('data:', data);

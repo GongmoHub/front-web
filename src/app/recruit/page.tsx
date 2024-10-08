@@ -38,11 +38,16 @@ export default function Page() {
     const fetchRecruits = async () => {
       // 서버에서 팀원 모집 공고 데이터 가져오기
       try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/board`);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/board`
+        );
         setRecruits(response.data); // 데이터가 배열이라고 가정
         console.log(response.data);
       } catch (error) {
-        console.error('데이터를 불러오는 중 오류 발생:', error);
+        console.error(
+          '데이터를 불러오는 중 오류 발생:',
+          error
+        );
       }
     };
 
@@ -60,8 +65,15 @@ export default function Page() {
             recruitTitle={recruit.title}
             recruitEndDate={recruit.closeDate}
             stacks={recruit.techStack}
-            gongmoTitle={recruit.contest ? recruit.contest.title : recruit.content} // 공모전 제목 또는 content
-            imageUrl={recruit.contest?.imageURL || recruit.openTalkURL} // 공모전 포스터 이미지 또는 대체 이미지
+            gongmoTitle={
+              recruit.contest
+                ? recruit.contest.title
+                : recruit.content
+            } // 공모전 제목 또는 content
+            imageUrl={
+              recruit.contest?.imageURL ||
+              recruit.openTalkURL
+            } // 공모전 포스터 이미지 또는 대체 이미지
           />
         ))}
       </section>

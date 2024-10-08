@@ -59,7 +59,7 @@ const RegisterPage: React.FC = () => {
 
     try {
       const response = await axios.post(
-        'http://172.16.1.240/mentor/signup',
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/mentor/signup`,
         data, // 데이터를 JSON 형식으로 전송
         {
           headers: {

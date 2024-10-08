@@ -21,8 +21,24 @@ section {
     .section_content {
         margin: 2rem 0rem;
 
-        .list-line {
-            display: flex;
+        label{
+            display: block; 
+            margin: 0.5rem 0rem;
         }
+
+        .list-line {
+            width: 100%;
+            display: flex;
+            margin: 2rem 0rem;
+
+            .list-item{
+                width: 100%;
+            }
+        }
+    }
+
+    .flex_container{
+        display: flex;
+        gap: 2rem;
     }
 }

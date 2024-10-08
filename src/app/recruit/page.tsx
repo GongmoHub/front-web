@@ -3,14 +3,6 @@ import './style.scss'
 import RecruitContainer from '@/components/recruit-container/RecruitContainer';
 
 export default function page() {
-
-  useEffect(() => {
-    first
-  
-    return () => {
-      second
-    }
-  }, [])
   
 
   return <div>

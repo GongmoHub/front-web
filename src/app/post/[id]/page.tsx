@@ -14,7 +14,7 @@ export default function page() {
       </div>
 
       <div className='post-detail'>
-          <img className='post-image' src="https://image.fmkorea.com/files/attach/new4/20241008/7552974476_486616_00dd2ec0c93ca43e30ff71ec7c7d39cd.jpg" alt="공모전 포스터 이미지" />
+          <img className='post-image' src="https://www.thinkcontest.com/thinkgood/common/display.do?filepath=contest_poster/image/&filename=bf7eb871c5d943ed9fbf4da8a27f4c63.png&defaultImage=/_custom/thinkgood/resource/image/sub/no_s_img.png" alt="공모전 포스터 이미지" />
         <section className='detail-info'>
           <div className='detail-info-item'>
             <span className='detail-info-title'>모집인원</span>

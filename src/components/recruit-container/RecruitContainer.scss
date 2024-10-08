@@ -1,22 +1,65 @@
-.container{
+.container {
     display: flex;
-    width:100% ;
+    width: 100%;
     padding: 1rem;
-    border: 2px solid #85A7FF;
     border-radius: 1rem;
     gap: 1rem;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); // 기본 그림자 효과
 
-    img{
+    transition: box-shadow 0.3s ease; // 마우스 오버 시 부드러운 전환 효과
+
+    &:hover {
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2); // 마우스 오버 시 그림자 더 진하게
+    }
+
+
+    img {
         width: 50%;
         height: auto;
     }
 
-    .recruit-info{
+    .recruit-info {
         display: flex;
         flex-direction: column;
+        word-wrap: break-word;
+        word-break: break-word; /* 단어가 너무 길 때 줄바꿈 */
 
-        .end-date{
+        h2{
+            margin-bottom: 1rem;
+        }
+
+        .stacks {
+            display: flex;
+            flex-wrap: wrap; // 스택이 화면 크기에 맞게 여러 줄로 배치되도록 함
+            gap: 0.5rem; // 각 스택 간의 간격
+            margin-top: auto;
+          
+            .stack {
+              background-color: #f0f0f0; // 스택의 배경색
+              color: #333; // 스택 텍스트 색상
+              padding: 0.5rem 1rem; // 텍스트 주위 여백
+              border-radius: 1rem; // 둥근 모서리
+              font-size: 0.9rem; // 폰트 크기
+              display: inline-block; // 요소가 줄바꿈되지 않고 한 줄에 나타남
+              white-space: nowrap; // 긴 텍스트가 줄바꿈되지 않도록 함
+              border: 1px solid #ddd; // 테두리 추가 (선택 사항)
+            }
+          }
+
+        .end-date {
             color: #b1b1b1;
+        }
+
+        h4 {
+            display: -webkit-box;
+            -webkit-line-clamp: 1;  /* 최대 1줄까지만 표시 */
+            -webkit-box-orient: vertical;
+            overflow: hidden;        /* 넘치는 텍스트 숨기기 */
+            text-overflow: ellipsis; /* 넘치는 텍스트에 말줄임표 적용 */
+            white-space: normal;     /* 줄바꿈 허용 */
+            max-width: 100%;         /* 부모 컨테이너 너비에 맞추기 */
+            margin-top: auto;
         }
     }
 }

@@ -5,7 +5,8 @@ import './style.scss'
 import { DownOutlined, UserOutlined } from '@ant-design/icons';
 import type { DatePickerProps } from 'antd';
 import type { MenuProps } from 'antd';
-import { Input, DatePicker, Select, Button, Space } from 'antd';
+import { Input, DatePicker, Select, Button, Space,message } from 'antd';
+import axios from 'axios';
 
 const { TextArea } = Input;
 
@@ -20,6 +21,23 @@ export default function page() {
 
   const handleChange = (value: string) => {
     console.log(`selected ${value}`);
+  };
+
+  const handleClick = async () => {
+    try {
+      // 서버에 POST 요청 보내기
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/board`, {
+        ...formData,
+        recruitReason: value, // 팀원 소개 및 모집 이유
+      });
+
+      if (response.status === 200) {
+        message.success('글이 성공적으로 등록되었습니다!');
+      }
+    } catch (error) {
+      console.error('글 등록 중 오류 발생:', error);
+      message.error('글 등록에 실패했습니다. 다시 시도해 주세요.');
+    }
   };
 
   return (
@@ -151,34 +169,19 @@ export default function page() {
                 onChange={handleChange}
                 options={[
                   {
-                    label: 'China',
-                    value: 'china',
-                    emoji: '🇨🇳',
-                    desc: 'China (中国)',
+                    label: 'React',
+                    value: 'React',
+                    desc: 'React',
                   },
                   {
-                    label: 'USA',
-                    value: 'usa',
-                    emoji: '🇺🇸',
-                    desc: 'USA (美国)',
-                  },
-                  {
-                    label: 'Japan',
-                    value: 'japan',
-                    emoji: '🇯🇵',
-                    desc: 'Japan (日本)',
-                  },
-                  {
-                    label: 'Korea',
-                    value: 'korea',
-                    emoji: '🇰🇷',
-                    desc: 'Korea (韩国)',
+                    label: 'TypeScript',
+                    value: 'TypeScript',
+                    desc: 'TypeScript',
                   },
                 ]}
                 optionRender={(option) => (
                   <Space>
                     <span role="img" aria-label={option.data.label}>
-                      {option.data.emoji}
                     </span>
                     {option.data.desc}
                   </Space>
@@ -215,6 +218,11 @@ export default function page() {
           </ul>
         </div>
       </section>
+      <div style={{ display: 'flex' }}>
+        <Button style={{ marginLeft: 'auto' }} onClick={handleClick}>
+          글 등록
+        </Button>
+      </div>
     </div>
   )
 }

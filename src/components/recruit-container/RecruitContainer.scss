@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    width:100% ;
+    padding: 1rem;
+    border: 2px solid #85A7FF;
+    border-radius: 1rem;
+    gap: 1rem;
+
+    img{
+        width: 50%;
+        height: auto;
+    }
+
+    .recruit-info{
+        display: flex;
+        flex-direction: column;
+
+        .end-date{
+            color: #b1b1b1;
+        }
+    }
+}

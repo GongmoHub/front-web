@@ -2,7 +2,8 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-
+  padding-left: 2%;
+  padding-right: 2%;
   .information_box {
     width: 40%;
     height: 300px;
@@ -24,7 +25,7 @@
     }
     .button_box {
       display: flex;
-      margin-top: 3%;
+      margin-top: 20px;
       justify-content: right;
       width: 100%;
       height: 20%;
@@ -34,8 +35,8 @@
         margin-left: 20px;
         font-family: 'BMJUA';
         width: 30%;
-        height: 80%;
-        font-size: 1.2rem;
+        height: 70%;
+        font-size: 1.1rem;
         border-radius: 10px;
         color: white;
         background-color: #244dff;
@@ -54,30 +55,38 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 1줄에 2개씩 */
   gap: 20px; /* 각 카드 사이의 간격 */
-  margin-top: 50px;
+  margin-top: 30px;
   padding: 20px;
   overflow: hidden;
   height: 900px;
-}
+  .competition_card {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 250px;
+    display: flex;
+    flex-direction: row;
+  }
 
-.competition_card {
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  height: 250px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
+  .competition_image {
+    width: 50%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background-color: #a4a4a4;
+  }
 
-.competition_image {
-  width: 100%;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 10px;
+  .competition_info {
+    width: 45%;
+    margin-left: 4%;
+    height: 200px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
 }
 
 .pagination {
@@ -90,7 +99,7 @@
   margin: 0 5px;
   padding: 5px 10px;
   border: none;
-  background-color: #ddd;
+  background-color: #ffffff;
   cursor: pointer;
   border-radius: 5px;
 }

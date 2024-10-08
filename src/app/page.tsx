@@ -126,11 +126,10 @@ const Mainpage: React.FC = () => {
           <div key={index} className="competition_card">
             <img
               src={competition.imageUrl}
-              alt={competition.name}
               className="competition_image"
             />
             <div className="competition_info">
-              <h3>{competition.name}</h3>
+              <p>{competition.name}</p>
               <p>시작일: {competition.startDate}</p>
               <p>종료일: {competition.endDate}</p>
               <p>특징: {competition.feature}</p>

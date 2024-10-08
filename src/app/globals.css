@@ -38,6 +38,7 @@ a {
 .main_page {
   margin-top: 210px;
   margin-bottom: 60px;
+  height: 1450px;
   width: 80vw;
   display: flex;
   justify-content: center;

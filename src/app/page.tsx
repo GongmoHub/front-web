@@ -3,13 +3,15 @@
 import './main.scss';
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 interface Competition {
-  name: string;
+  contestId: number;
+  title: string;
+  content: string;
+  contestURL: string;
   startDate: string;
   endDate: string;
-  feature: string;
-  description: string;
-  imageUrl: string;
+  imageURL: string;
 }
 
 const Mainpage: React.FC = () => {
@@ -20,75 +22,20 @@ const Mainpage: React.FC = () => {
   const competitionsPerPage = 6; // 한 페이지에 6개의 공모전
   const router = useRouter();
   useEffect(() => {
-    // 예시 데이터를 서버에서 받아오는 것처럼 설정
-    const fetchCompetitions = () => {
-      const data: Competition[] = [
-        {
-          name: '공모전 1',
-          startDate: '2024-01-01',
-          endDate: '2024-02-01',
-          feature: '창의성',
-          description: '공모전 1 설명',
-          imageUrl: 'https://example.com/image1.jpg',
-        },
-        {
-          name: '공모전 2',
-          startDate: '2024-03-01',
-          endDate: '2024-04-01',
-          feature: '팀워크',
-          description: '공모전 2 설명',
-          imageUrl: 'https://example.com/image2.jpg',
-        },
-        {
-          name: '공모전 3',
-          startDate: '2024-05-01',
-          endDate: '2024-06-01',
-          feature: '기술력',
-          description: '공모전 3 설명',
-          imageUrl: 'https://example.com/image3.jpg',
-        },
-        {
-          name: '공모전 4',
-          startDate: '2024-07-01',
-          endDate: '2024-08-01',
-          feature: '문제 해결',
-          description: '공모전 4 설명',
-          imageUrl: 'https://example.com/image4.jpg',
-        },
-        {
-          name: '공모전 5',
-          startDate: '2024-09-01',
-          endDate: '2024-10-01',
-          feature: '지속 가능성',
-          description: '공모전 5 설명',
-          imageUrl: 'https://example.com/image5.jpg',
-        },
-        {
-          name: '공모전 6',
-          startDate: '2024-11-01',
-          endDate: '2024-12-01',
-          feature: '사회적 책임',
-          description: '공모전 6 설명',
-          imageUrl: 'https://example.com/image6.jpg',
-        },
-        {
-          name: '공모전 7',
-          startDate: '2025-01-01',
-          endDate: '2025-02-01',
-          feature: '혁신',
-          description: '공모전 7 설명',
-          imageUrl: 'https://example.com/image7.jpg',
-        },
-        {
-          name: '공모전 8',
-          startDate: '2025-03-01',
-          endDate: '2025-04-01',
-          feature: '글로벌',
-          description: '공모전 8 설명',
-          imageUrl: 'https://example.com/image8.jpg',
-        },
-      ];
-      setCompetitions(data);
+    // 서버에서 공모전 데이터 가져오기
+    const fetchCompetitions = async () => {
+      try {
+        const response = await axios.get(
+          'http://172.20.10.9/contest'
+        );
+        const data: Competition[] = response.data; // 서버로부터 받아온 데이터를 Competition 배열로 변환
+        setCompetitions(data);
+      } catch (error) {
+        console.error(
+          '공모전 데이터를 가져오는 중 오류 발생:',
+          error
+        );
+      }
     };
 
     fetchCompetitions();
@@ -132,15 +79,21 @@ const Mainpage: React.FC = () => {
         {currentCompetitions.map((competition, index) => (
           <div key={index} className="competition_card">
             <img
-              src={competition.imageUrl}
+              src={competition.imageURL}
               className="competition_image"
             />
             <div className="competition_info">
-              <p>{competition.name}</p>
+              <p>{competition.title}</p>
               <p>시작일: {competition.startDate}</p>
               <p>종료일: {competition.endDate}</p>
-              <p>특징: {competition.feature}</p>
-              <p>{competition.description}</p>
+              <p>내용: {competition.content}</p>
+              <a
+                href={competition.contestURL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {competition.contestURL}
+              </a>
             </div>
           </div>
         ))}

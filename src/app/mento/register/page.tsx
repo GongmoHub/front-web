@@ -45,11 +45,6 @@ const RegisterPage: React.FC = () => {
   };
 
   const handleSubmit = async () => {
-    if (!formData.imageURL) {
-      setErrorMessage('이미지를 반드시 선택해야 합니다.');
-      return;
-    }
-
     const data = new FormData();
     data.append('id', formData.id);
     data.append('password', formData.password);
@@ -61,16 +56,11 @@ const RegisterPage: React.FC = () => {
     if (formData.imageURL) {
       data.append('imageURL', formData.imageURL);
     }
-
+    console.log(formData);
     try {
       const response = await axios.post(
-        'https://your-server-endpoint.com/api/register',
-        data,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-          },
-        }
+        'http://172.20.10.9/mentor/signup',
+        data
       );
 
       if (response.status === 200) {
@@ -148,7 +138,7 @@ const RegisterPage: React.FC = () => {
           className="input_box"
           type="text"
           name="openTalkURL"
-          placeholder="연락처 및 오픈톡 URL"
+          placeholder="오픈톡 URL"
           value={formData.openTalkURL}
           onChange={handleChange}
         />

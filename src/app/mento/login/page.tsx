@@ -35,7 +35,7 @@ const LoginPage: React.FC = () => {
     // 서버로 로그인 요청 보내기
     try {
       const response = await axios.post(
-        'https://your-server-endpoint.com/api/login',
+        'http://172.20.10.9/mentor/signin',
         {
           uid: uid,
           password: password,

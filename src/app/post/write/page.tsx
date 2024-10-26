@@ -3,81 +3,48 @@
 import React, { useState } from 'react';
 import './style.scss';
 import {
+  DownOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
+import type { DatePickerProps } from 'antd';
+import type { MenuProps } from 'antd';
+import {
   Input,
   DatePicker,
   Select,
   Button,
+  Space,
   message,
 } from 'antd';
 import axios from 'axios';
 
 const { TextArea } = Input;
 
-export default function Page() {
+export default function page() {
   const [numberOfPeople, setNumberOfPeople] =
     useState('모집 인원');
-  const [recruitReason, setRecruitReason] = useState('');
-  const [competitionTitle, setCompetitionTitle] =
-    useState('');
-  const [startDate, setStartDate] = useState(null);
-  const [endDate, setEndDate] = useState(null);
-  const [closingDate, setClosingDate] = useState(null);
-  const [communicationMethod, setCommunicationMethod] =
-    useState('연락 방법');
-  const [link, setLink] = useState('');
-  const [selectedTechStack, setSelectedTechStack] =
-    useState<string[]>([]); // 필요 기술 스택 배열
+  const [value, setValue] = useState('');
 
-  const onDateChange =
-    (setter: React.Dispatch<React.SetStateAction<any>>) =>
-    (date, dateString) => {
-      setter(dateString); // DatePicker의 값을 문자열로 저장
-    };
-
-  const handleInputChange =
-    (
-      setter: React.Dispatch<React.SetStateAction<string>>
-    ) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
-      setter(e.target.value);
-    };
-
-  const handleTextAreaChange = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
+  const onChange: DatePickerProps['onChange'] = (
+    date,
+    dateString
   ) => {
-    setRecruitReason(e.target.value);
+    console.log(date, dateString);
   };
 
-  const handleSelectChange =
-    (
-      setter: React.Dispatch<React.SetStateAction<string>>
-    ) =>
-    (value: string) => {
-      setter(value);
-    };
-
-  // 필요 기술 스택 다중 선택 처리
-  const handleTechStackChange = (value: string[]) => {
-    setSelectedTechStack(value);
+  const handleChange = (value: string) => {
+    console.log(`selected ${value}`);
   };
 
-  const handleSubmit = async () => {
+  const handleClick = async () => {
     try {
-      const formData = {
-        numberOfPeople,
-        recruitReason,
-        competitionTitle,
-        startDate,
-        endDate,
-        closingDate,
-        communicationMethod,
-        link,
-        selectedTechStack,
-      };
-
+      // 서버에 POST 요청 보내기
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_BACKEND_URL}/board`,
-        formData
+        {
+          ...FormData,
+          recruitReason: value, // 팀원 소개 및 모집 이유
+        }
       );
 
       if (response.status === 200) {
@@ -100,16 +67,9 @@ export default function Page() {
           <h2>참가할 공모전을 검색해주세요.</h2>
         </div>
         <div className="section_content">
-          <Input
-            placeholder="공모전을 검색해주세요"
-            value={competitionTitle}
-            onChange={handleInputChange(
-              setCompetitionTitle
-            )}
-          />
+          <Input placeholder="공모전을 검색해주세요" />
         </div>
       </section>
-
       {/* 2 */}
       <section className="section_box">
         <div className="section_title">
@@ -124,9 +84,7 @@ export default function Page() {
                 <Select
                   defaultValue="모집 인원"
                   style={{ width: 150 }}
-                  onChange={handleSelectChange(
-                    setNumberOfPeople
-                  )}
+                  onChange={handleChange}
                   options={[
                     { value: '1명', label: '1명' },
                     { value: '2명', label: '2명' },
@@ -143,9 +101,7 @@ export default function Page() {
                 <Select
                   defaultValue="진행 방식"
                   style={{ width: 150 }}
-                  onChange={handleSelectChange(
-                    setNumberOfPeople
-                  )}
+                  onChange={handleChange}
                   options={[
                     { value: '온라인', label: '온라인' },
                     {
@@ -167,9 +123,7 @@ export default function Page() {
                 <Select
                   defaultValue="모집 분야"
                   style={{ width: 150 }}
-                  onChange={handleSelectChange(
-                    setNumberOfPeople
-                  )}
+                  onChange={handleChange}
                   options={[
                     { value: '프론트', label: '프론트' },
                     { value: '백엔드', label: '백엔드' },
@@ -194,34 +148,26 @@ export default function Page() {
               </div>
             </li>
           </ul>
-
           <ul className="list-line">
             <li className="list-item">
               <label htmlFor="">모집 마감 일</label>
               <div>
-                <DatePicker
-                  onChange={onDateChange(setClosingDate)}
-                />
+                <DatePicker onChange={onChange} />
               </div>
             </li>
             <li className="list-item">
               <label htmlFor="">프로젝트 시작일</label>
               <div>
-                <DatePicker
-                  onChange={onDateChange(setStartDate)}
-                />
+                <DatePicker onChange={onChange} />
               </div>
             </li>
             <li className="list-item">
               <label htmlFor="">프로젝트 마감일</label>
               <div>
-                <DatePicker
-                  onChange={onDateChange(setEndDate)}
-                />
+                <DatePicker onChange={onChange} />
               </div>
             </li>
           </ul>
-
           <ul className="list-line">
             <li className="list-item">
               <label htmlFor="">연락 방법</label>
@@ -229,9 +175,7 @@ export default function Page() {
                 <Select
                   defaultValue="연락 방법"
                   style={{ width: 150 }}
-                  onChange={handleSelectChange(
-                    setCommunicationMethod
-                  )}
+                  onChange={handleChange}
                   options={[
                     {
                       value: '카카오톡',
@@ -241,11 +185,7 @@ export default function Page() {
                     { value: '구글 폼', label: '구글 폼' },
                   ]}
                 />
-                <Input
-                  placeholder="관련 링크를 올려주세요."
-                  value={link}
-                  onChange={handleInputChange(setLink)}
-                />
+                <Input placeholder="관련 링크를 올려주세요." />
               </div>
             </li>
           </ul>
@@ -257,47 +197,35 @@ export default function Page() {
                 mode="multiple"
                 style={{ width: '100%' }}
                 placeholder="필요 기술 스택을 선택해주세요."
-                onChange={handleTechStackChange} // 기술 스택 배열에 저장
+                onChange={handleChange}
                 options={[
-                  { label: 'React', value: 'React' },
+                  {
+                    label: 'React',
+                    value: 'React',
+                    desc: 'React',
+                  },
                   {
                     label: 'TypeScript',
                     value: 'TypeScript',
-                  },
-                  { label: 'Node.js', value: 'Node.js' },
-                  { label: 'Express', value: 'Express' },
-                  {
-                    label: 'Spring Boot',
-                    value: 'Spring Boot',
-                  },
-                  { label: 'Docker', value: 'Docker' },
-                  { label: 'k8s', value: 'k8s' },
-                  { label: 'GraphQL', value: 'GraphQL' },
-                  { label: 'Figma', value: 'Figma' },
-                  { label: 'Adobe XD', value: 'Adobe XD' },
-                  { label: 'Sass', value: 'Sass' },
-                  { label: 'Jenkins', value: 'Jenkins' },
-                  { label: 'Git', value: 'Git' },
-                  { label: 'MySQL', value: 'MySQL' },
-                  {
-                    label: 'PostgreSQL',
-                    value: 'PostgreSQL',
-                  },
-                  { label: 'MongoDB', value: 'MongoDB' },
-                  { label: 'Redis', value: 'Redis' },
-                  {
-                    label: 'ElasticSearch',
-                    value: 'ElasticSearch',
+                    desc: 'TypeScript',
                   },
                 ]}
+                optionRender={(option) => (
+                  <Space>
+                    <span
+                      role="img"
+                      aria-label={option.data.label}
+                    ></span>
+                    {option.data.desc}
+                  </Space>
+                )}
               />
             </li>
           </ul>
         </div>
       </section>
-
       {/* 3 */}
-      <section>
+      <section className="section_box">
         <div className="section_title">
           <span className="order">3</span>
           <h2>프로젝트에 대해 소개해주세요.</h2>
@@ -305,12 +233,18 @@ export default function Page() {
         <div className="section_content">
           <ul className="list-line">
             <li className="list-item">
+              <label htmlFor="">제목</label>
+              <Input placeholder="제목을 입력해주세요" />
+            </li>
+          </ul>
+          <ul className="list-line">
+            <li className="list-item">
               <label htmlFor="">
                 팀원 소개 및 모집 이유
               </label>
               <TextArea
-                value={recruitReason}
-                onChange={handleTextAreaChange}
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
                 placeholder="팀원 소개 및 모집 이유, 목표 등을 입력해주세요."
                 autoSize={{ minRows: 10, maxRows: 20 }}
               />
@@ -318,11 +252,10 @@ export default function Page() {
           </ul>
         </div>
       </section>
-
       <div style={{ display: 'flex' }}>
         <Button
           style={{ marginLeft: 'auto' }}
-          onClick={handleSubmit}
+          onClick={handleClick}
         >
           글 등록
         </Button>

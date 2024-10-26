@@ -28,12 +28,14 @@ type Board = {
   contactType: string;
   contactNum: number;
   recruitmentType: string;
-  rule:string,
+  rule: string;
   contest: Contest | null;
 };
 
 export default function Page() {
-  const [recruit, setRecruit] = useState<Board | null>(null); // API에서 받은 데이터 상태 관리
+  const [recruit, setRecruit] = useState<Board | null>(
+    null
+  ); // API에서 받은 데이터 상태 관리
   const [loading, setLoading] = useState(true); // 로딩 상태
 
   const pathname = usePathname(); // 현재 경로에서 id를 가져옴
@@ -43,16 +45,25 @@ export default function Page() {
     if (!id) return; // id가 없으면 아무것도 하지 않음
 
     const fetchRecruits = async () => {
-      console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/board/${id}`)
+      console.log(
+        `${process.env.NEXT_PUBLIC_BACKEND_URL}/board/${id}`
+      );
       try {
         // 서버에서 팀원 모집 공고 데이터 가져오기
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/board/${id}`);
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/board/${id}`
+        );
         setRecruit(response.data); // 데이터 저장
         setLoading(false); // 로딩 완료
-        console.log(`${process.env.NEXT_PUBLIC_BACKEND_URL}/board/${id}`)
+        console.log(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/board/${id}`
+        );
         console.log(response.data);
       } catch (error) {
-        console.error('데이터를 불러오는 중 오류 발생:', error);
+        console.error(
+          '데이터를 불러오는 중 오류 발생:',
+          error
+        );
         setLoading(false); // 에러가 발생해도 로딩 종료
       }
     };
@@ -68,57 +79,81 @@ export default function Page() {
     return <p>데이터를 불러오지 못했습니다.</p>; // 데이터가 없을 때 처리
   }
 
-  const handleClick = () => {
-    router.push(`/recruit`);
-}
-
   return (
     <div>
       <h1>{recruit.title}</h1>
 
-      <div className='post-meta'>
+      <div className="post-meta">
         <span>작성 날짜: {recruit.postDate}</span>
       </div>
 
-      <div className='post-detail'>
+      <div className="post-detail">
         <img
-          className='post-image'
+          className="post-image"
           src={recruit.contest?.imageURL}
           alt="공모전 포스터 이미지"
         />
-        <section className='detail-info'>
-        <div className='detail-info-item'>
-            <span className='detail-info-title'>모집 마감일</span>
-            <span className='detail-info-content'>{recruit.closeDate}</span>
+        <section className="detail-info">
+          <div className="detail-info-item">
+            <span className="detail-info-title">
+              모집 마감일
+            </span>
+            <span className="detail-info-content">
+              {recruit.closeDate}
+            </span>
           </div>
-          <div className='detail-info-item'>
-            <span className='detail-info-title'>모집인원</span>
-            <span className='detail-info-content'>{recruit.contactNum}명</span>
+          <div className="detail-info-item">
+            <span className="detail-info-title">
+              모집인원
+            </span>
+            <span className="detail-info-content">
+              {recruit.contactNum}명
+            </span>
           </div>
-          <div className='detail-info-item'>
-            <span className='detail-info-title'>진행 방식</span>
-            <span className='detail-info-content'>{recruit.rule}</span>
+          <div className="detail-info-item">
+            <span className="detail-info-title">
+              진행 방식
+            </span>
+            <span className="detail-info-content">
+              {recruit.rule}
+            </span>
           </div>
-          <div className='detail-info-item'>
-            <span className='detail-info-title'>모집 분야</span>
-            <span className='detail-info-content'>{recruit.recruitmentType}</span>
+          <div className="detail-info-item">
+            <span className="detail-info-title">
+              모집 분야
+            </span>
+            <span className="detail-info-content">
+              {recruit.recruitmentType}
+            </span>
           </div>
-          <div className='detail-info-item'>
-            <span className='detail-info-title'>프로젝트 시작일</span>
-            <span className='detail-info-content'>{recruit.startDate}</span>
+          <div className="detail-info-item">
+            <span className="detail-info-title">
+              프로젝트 시작일
+            </span>
+            <span className="detail-info-content">
+              {recruit.startDate}
+            </span>
           </div>
-          <div className='detail-info-item'>
-            <span className='detail-info-title'>연락 방법</span>
-            <span className='detail-info-content'>{recruit.contactType}</span>
+          <div className="detail-info-item">
+            <span className="detail-info-title">
+              연락 방법
+            </span>
+            <span className="detail-info-content">
+              {recruit.contactType}
+            </span>
           </div>
-          <div className='detail-info-item'>
-            <span className='detail-info-title'>필요 기술 스택</span>
+          <div className="detail-info-item">
+            <span className="detail-info-title">
+              필요 기술 스택
+            </span>
           </div>
-          <span className='detail-info-content'>{recruit.techStack.join(', ')}</span>
+          <span className="detail-info-content">
+            {recruit.techStack.join(', ')}
+          </span>
         </section>
       </div>
 
-      <div className='post-content'>
+      <div className="post-content">
         <p>{recruit.content}</p>
       </div>
     </div>

@@ -1,6 +1,28 @@
-section{
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(40%, 1fr));
-    gap: 3rem;
+.recruit_section {
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(40%, 1fr)
+  );
+  gap: 3rem;
+}
+
+.button-box {
+  display: flex;
+  margin-top: -2rem;
+  justify-content: right;
+  margin-bottom: 1rem;
+  margin-right: 1rem;
+  .write-button {
+    width: 160px;
+    height: 50px;
+    font-size: 1.1rem;
+    background-color: #f8f9fa;
+    font-family: 'BMJUA';
+    border-radius: 10px;
+    color: white;
+    background-color: #244dff;
+    border: none;
+  }
 }

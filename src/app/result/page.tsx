@@ -42,7 +42,7 @@ const ResultPage: React.FC = () => {
         console.log('ordinary:', ordinary);
         // 동적 경로로 요청 보내기
         const response = await axios.get(
-          `http://172.16.1.240/contest/ordinary/${ordinary}`
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/contest/ordinary/${ordinary}`
         );
 
         if (response.status === 200) {

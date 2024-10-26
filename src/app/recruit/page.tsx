@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import './style.scss';
 import RecruitContainer from '@/components/recruit-container/RecruitContainer';
 import axios from 'axios';
@@ -33,7 +34,7 @@ type Board = {
 
 export default function Page() {
   const [recruits, setRecruits] = useState<Board[]>([]); // 배열로 설정
-
+  const router = useRouter();
   useEffect(() => {
     const fetchRecruits = async () => {
       // 서버에서 팀원 모집 공고 데이터 가져오기
@@ -54,9 +55,22 @@ export default function Page() {
     fetchRecruits();
   }, []);
 
+  const moveToWritePage = () => {
+    // 모집글 작성 페이지로 이동
+    // 페이지 이동을 위해 라우터를 사용
+    router.push('/post/write');
+  };
   return (
     <div>
-      <section>
+      <div className="button-box">
+        <button
+          onClick={() => moveToWritePage()}
+          className="write-button"
+        >
+          모집글 작성
+        </button>
+      </div>
+      <section className="recruit_section">
         {/* RecruitContainer로 각각의 데이터를 출력 */}
         {recruits.map((recruit) => (
           <RecruitContainer
